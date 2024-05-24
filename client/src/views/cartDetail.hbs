@@ -1,0 +1,139 @@
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card-registration card-registration-2" style="border-radius: 10px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="cart-container p-5">
+                  {{!-- Chèn html tại đây --}}
+                </div>
+              </div>
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="text-uppercase fw-bold mb-5 mt-2 pt-1">Thanh Toán</h3>
+                  <hr class="my-4">
+
+                  <h5 class=" mb-3">Phương thức thanh toán</h5>
+
+                  <div class="mb-4 pb-2">
+                    <select class="select">
+                      <option value="1">Thanh toán khi nhận hàng</option>
+                      <option value="2">Thanh toán qua thẻ ATM nội địa</option>
+                    </select>
+                  </div>
+
+                  <hr class="my-4">
+
+                  <div class="total-price d-flex justify-content-between mb-5"></div>
+
+                  <a href="/order" class="btn btn-dark btn-block btn-lg order-btn" style="background-color: black;">Thanh Toán</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> slider/slider}}
+
+<script>
+  const checkCart = () => {
+      const getDataFromLS = localStorage.getItem('cart')
+      const orderBtn = document.querySelector('.order-btn')
+      const cartContainer = document.querySelector('.cart-container')
+      const data = JSON.parse(getDataFromLS)
+      if (data == null || data.length === 0) {
+        orderBtn.setAttribute('href', '#')
+      };
+    }
+  checkCart()
+
+  const getData = () => {
+    const $ = (className) => document.getElementsByClassName(className)
+    const totalPrice = $('total-price')[0]
+    const cartContainer = $('cart-container')[0]
+    let html = ''
+
+    let cart = []
+    let cartHTML = `<div class="d-flex justify-content-between align-items-center mb-5">
+                      <h2 class="text-uppercase mb-0 text-black">Giỏ hàng</h2>
+                    </div>
+                    <hr class="my-4">`
+    const data = localStorage.getItem('cart')
+    cart = JSON.parse(data)
+    let total = 0
+    cart.map((e) => {
+      total += e.price * e.number
+      cartHTML += `<div class="product-detail row mb-4 d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img src="${e.image}" class="product-img img-fluid rounded-3" alt="Cotton T-shirt">
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <a href="/id=${e.id}" class="text-black mb-0" style="text-decoration: none; color: black">${e.name}</a>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                      <input id="form1" min="1" max="100" name="productnumber" value="${e.number}" 
+                      type="number" class="product-number form-control form-control-sm text-center" style="width: 50px"
+                      onchange="changeInfor(this, ${e.id})"/>
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="padding: 0">
+                      <h6 class="product-price price mb-0">${e.price}</h6>
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2" style="padding: 0">
+                      <span class="btn-sm btn-light text-danger" onclick="removeCart(${e.id}), checkCart()"><i class="fas fa-times"></i></span>
+                    </div>
+                  </div>
+
+                  <hr class="my-4">`
+    })
+
+    html = cartHTML + `<div class="pt-5">
+                      <h6 class="mb-0"><a href="/" class="text-body"><i
+                            class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                    </div>`
+    
+    cartContainer.innerHTML = html
+    totalPrice.innerHTML = `<h5 class="text-uppercase">Tổng Tiền</h5>
+                            <h5 class="price">${total}</h5>`
+  }
+
+  getData()
+
+  const removeCart = (idproduct) => {
+    let data = []
+    const getDataFromLS = localStorage.getItem('cart')
+    data = JSON.parse(getDataFromLS)
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == idproduct) {
+        data.splice(i, 1)
+        break
+      }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(data))
+    getData()
+    formatMoney()
+  }
+
+  const changeInfor = (input, idproduct) => {
+    let data = []
+    const value = input.value
+    const getDataFromLS = localStorage.getItem('cart')
+    data = JSON.parse(getDataFromLS)
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == idproduct) {
+        data[i].number = value
+        break
+      }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(data))
+    getData()
+    formatMoney()
+  }
+</script>

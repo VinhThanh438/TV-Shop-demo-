@@ -1,0 +1,87 @@
+<div id="product_cart" class="border_content">
+    {{#each data ~}}
+        <div id="pc_img">
+            <img src={{image}} alt="Ảnh sản phẩm">
+        </div>
+
+        <div id="pc_detail">
+            <h3>{{nameproduct}}</h3>
+                <p class="price">{{priceproduct}}</p>
+                <label>Số lượng:</label><input class="pr_number" type="number" min="1" max="100" value="1" name="productnumber">
+                <p class="pc_des-heading">Mô tả chi tiết:</p>
+                <p class="pc_des">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <div class="pc_btn">
+                    <button onclick="addCart({{idproduct}}, {{priceproduct}}, '{{nameproduct}}', '{{image}}')">Thêm vào giỏ hàng</button>
+                    <a href="/cart">Vào giỏ hàng</a>
+                </div>
+        </div>
+    {{~/each}} 
+    <div id="success-message" class="success-message">
+        <span class="message"></span>
+    </div>
+</div>
+
+
+<script>
+    // Lấy tham chiếu đến phần tử thông báo và nút đóng
+    const successMessage = document.getElementById('success-message');
+    const message = document.querySelector('.message')
+
+    // Hiển thị thông báo
+    function showSuccessMessage(text) {
+        message.innerText = text
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 2000)
+    };
+
+    const getProductNumber = document.querySelector('.pr_number')
+
+    const checkProduct = (idproduct) => {
+        let check = false
+        let getStorage = localStorage.getItem('cart')
+        if (getStorage) {
+            const parseData = JSON.parse(getStorage)
+            parseData.map((e) => {
+                if (e.id == idproduct) {
+                    e.number += parseInt(getProductNumber.value)
+                    check = true
+                }
+            })
+            localStorage.setItem('cart', JSON.stringify(parseData))
+        }
+        return check
+    }
+
+    const addCart = (idproduct, priceproduct, nameproduct, image) => {
+        let store = []
+
+        // Kiểm tra xem sản phẩm đã được thêm trước đó hay chưa.
+        if (checkProduct(idproduct)) {
+            showSuccessMessage('Sản phẩm đã được cập nhật thành công!');
+        } else {
+            const getStorage = localStorage.getItem('cart')
+            if (getStorage) store = JSON.parse(getStorage);
+            store.push({
+                id: idproduct,
+                name: nameproduct,
+                price: parseInt(priceproduct),
+                image: image,
+                number: parseInt(getProductNumber.value)
+            })
+            localStorage.setItem('cart', JSON.stringify(store))
+            showSuccessMessage('Sản phẩm đã được thêm vào giỏ hàng');
+        }
+    }
+</script>
+
+{{> slider/slider}}

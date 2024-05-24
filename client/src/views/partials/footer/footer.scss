@@ -1,0 +1,195 @@
+.footer {
+    padding-top: 50px; 
+    margin-top: 50px;
+}
+
+.footer-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 auto;
+    max-width: 1400px;
+    list-style: none;
+  }
+  .footer-item {
+    /* margin: 0 20px;
+     */
+    /* padding: 0 20px; */
+    margin-top: 20px;
+    /* text-align: center; */
+  }
+  .footer-item-main {
+    font-size: 1.3rem;
+    font-weight: 700;
+    /* text-align: center;                                                                                                                                                                                                  */
+  }
+  .footer-item_text {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .footer-content {
+    /* text-align: center; */
+  
+    margin-top: 15px;
+  }
+  .footer-item_a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .footer-item:nth-child(2) {
+    margin-left: 25px;
+  }
+  
+  .footer-item-active {
+    font-weight: 700;
+  }
+  
+  .social {
+    display: inline-flex;
+    list-style: none;
+    margin-top: 20px;
+  }
+  
+  .social .icon {
+    position: relative;
+    background: #ffffff;
+    color: var(--boder-xam);
+    border-radius: 50%;
+    padding: 10px;
+    margin: 0 6px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .social .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .social .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .social .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .social .icon:hover span,
+  .social .icon:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .social .facebook:hover,
+  .social .facebook:hover .tooltip,
+  .social .facebook:hover .tooltip::before {
+    background: #1877f2;
+    color: #ffffff;
+  }
+  
+  .social .twitter:hover,
+  .social .twitter:hover .tooltip,
+  .social .twitter:hover .tooltip::before {
+    background: #1da1f2;
+    color: #ffffff;
+  }
+  
+  .social .instagram:hover,
+  .social .instagram:hover .tooltip,
+  .social .instagram:hover .tooltip::before {
+    background: #e4405f;
+    color: #ffffff;
+  }
+  
+  .social .github:hover,
+  .social .github:hover .tooltip,
+  .social .github:hover .tooltip::before {
+    background: #333333;
+    color: #ffffff;
+  }
+  
+  .social .youtube:hover,
+  .social .youtube:hover .tooltip,
+  .social .youtube:hover .tooltip::before {
+    background: #cd201f;
+    color: #ffffff;
+  }
+  
+  /* footer mid  */
+  .footer-mid {
+    background-color: var(--boder-xam);
+    max-width: 100%;
+    height: var(--footer-mid);
+  }
+  
+  .footer-mid-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    line-height: var(--footer-mid);
+    border: 0;
+    letter-spacing: 0.5rem;
+  }
+  .footer-mid-item {
+    position: relative;
+  }
+  .footer-mid-text {
+    color: var(--black-color);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+  }
+  .footer-mid-input {
+    border: 0;
+    padding: 10px;
+    border-radius: 50px;
+    width: 340px;
+    border: none;
+    height: 40px;
+    outline: navajowhite;
+    position: relative;
+  }
+  .input-email {
+    position: absolute;
+    top: 41px;
+    right: 14px;
+    color: #8a8888;
+  }
+  
+  .change-default {
+    text-decoration: none;
+    color: inherit;
+  }

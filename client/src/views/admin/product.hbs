@@ -1,0 +1,257 @@
+<div id="admin-product">
+    <div class="product-header layout-common">
+        <div>
+            <b>Danh sách sản phẩm</b>
+            <span class="badge badge-secondary badge-pill">{{data.length}}</span>
+        </div>
+        <div class="clock"></div>
+    </div>
+
+    <div class="row layout-common">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                              <button class="btn btn-add btn-sm" data-toggle="modal" data-target="#addModal"
+                              aria-hidden="true"><i class="fas fa-plus"></i>Tạo mới sản phẩm</button>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-sm delete-all" type="button" title="Xóa"><i
+                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                            </div>
+                        </div>
+                        <hr style="margin-bottom: 30px;">
+                        
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th width="10"><input type="checkbox" id="all"></th>
+                                    <th width="130">Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Ảnh</th>
+                                    <th width="100">Số lượng</th>
+                                    <th>Tình trạng</th>
+                                    <th>Giá tiền</th>
+                                    <th>Danh mục</th>
+                                    <th width="20">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data ~}}
+                                <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>{{idproduct}}</td>
+                                    <td><a href="/id={{idproduct}}" class="text-secondary">{{nameproduct}}</a></td>
+                                    <td><img src={{image}} alt="" width="80px;"></td>
+                                    <td>{{condproduct}}</td>
+                                     <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td class="price">{{priceproduct}}</td>
+                                    <td>Giày thời trang</td>
+                                    <td>
+                                        <button class="btn btn-sm trash" type="button" title="Xóa" data-toggle="modal" data-target="#removeModal"
+                                        aria-hidden="true" onclick="deleteModal({{idproduct}})"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                        data-target="#updateModal"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                {{~/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nameproduct">Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="nameproduct" id="nameproduct" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceproduct">Giá sản phẩm</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="priceproduct" id="priceproduct"
+                                oninput="formatCurrency(this)" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" name="condproduct" id="condproduct"
+                                min="0" max="10000" placeholder="Số lượng" required>
+                            </div>
+
+                            <div class="col form-group custom-file align-item-center">
+                                <input type="file" class="custom-file-input" name="image" id="image" required>
+                                <label class="custom-file-label" for="image">Chọn ảnh</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer form-group">
+                        <button type="submit" class="btn">Thêm sản phẩm</button>
+                        <input type="reset" class="btn" value="Xóa">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc muốn xóa sản phẩm sau</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-add btn-sm deleteBtn">Xác nhận</a>
+                    <button type="button" class="btn btn-sm trash" 
+                    style="width: 16% !important; height: 40px !important;" 
+                    data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa chi tiết sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/admin/updateproduct" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nameproduct">Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="nameproduct" id="nameproduct" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceproduct">Giá sản phẩm</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="priceproduct" id="priceproduct"
+                                oninput="formatCurrency(this)" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" name="condproduct" id="condproduct"
+                                min="0" max="10000" placeholder="Số lượng" required>
+                            </div>
+
+                            <div class="col form-group custom-file align-item-center">
+                                <input type="file" class="custom-file-input" name="image" id="image" required>
+                                <label class="custom-file-label" for="image">Chọn ảnh</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer form-group">
+                        <button type="submit" class="btn btn-warning btn-sm edit"
+                        style="width: 16% !important; height: 40px !important;">Sửa</button>
+                        <button type="button" class="btn btn-sm trash" 
+                        style="width: 16% !important; height: 40px !important;" 
+                        data-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteModal = (idproduct) => {
+            const removeModal = $('.deleteBtn')
+            removeModal.setAttribute("href", `/product/delete/id=${idproduct}`)
+        }
+    </script>
+
+    <script>
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+            document.querySelector('.clock').innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
+
+        time()
+    </script>
+
+    <script>
+        function formatCurrency(input) {
+            // Xóa tất cả các ký tự không phải số
+            var value = input.value.replace(/\D/g, '');
+            
+            // Kiểm tra xem có hàng nghìn không
+            if (value.length > 3) {
+                // Định dạng số hàng nghìn và hàng triệu (nếu có)
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+
+            // Gán lại giá trị đã định dạng vào trường nhập liệu
+            input.value = value;
+        }
+    </script>
+</div>

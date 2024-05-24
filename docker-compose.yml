@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+
+  # mysql service
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - "3307:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./.mysql-data/db:/var/lib/mysql
+      - ./server/src/data/DB_TV_SHOP.sql:/docker-entrypoint-initdb.d/init.sql
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=mysql
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql
+
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "4080:4080"
+    depends_on:
+      - server
+
+volumes:
+  mysql_data: {}

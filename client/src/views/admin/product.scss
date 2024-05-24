@@ -1,0 +1,89 @@
+.layout-common {
+    width: 96%;
+    border-radius: 4px; 
+    padding: 0 14px;
+    background-color: white;
+    box-shadow: 0 1px 2px #0000003d;
+    margin: 16px auto;
+}
+
+.btn-add, .btn-excel, .delete-all {
+    width: 160px;
+    height: 40px;
+}
+
+.btn-add {
+    background: #9df99d !important;
+    color: #003c00 !important;
+}
+
+.btn-excel {
+    color: #008c04 !important;
+    background: #a2ecb5 !important;
+}
+
+.delete-all {
+    color: white !important;
+    background-color: rgb(251, 76, 76);
+}
+
+.trash, .edit {
+    width: 40px;
+    height: 30px;
+}
+
+.trash {
+    background: #f7c3c2;
+    border: none;
+    color: #de0400;
+}
+
+.edit {
+    color: rgb(245, 157, 57);
+    background-color: rgb(251, 226, 197);
+    border: none;
+    margin-left: 8px;
+}
+
+.bg-success {
+    background-color: #bfefc4 !important;
+    color: #02790c !important;
+    padding: 10px;
+}
+
+.bg-danger {
+    background-color: #f9c9cd !important;
+    color: #a90312 !important;
+    padding: 10px;
+}
+
+#admin-product {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .product-header {
+        display: flex;
+        height: 40px;
+        justify-content: space-between;
+        line-height: 40px;
+        border-left: 6px solid #FFD43B;
+
+        span {
+            margin-left: 6px;
+        }
+    }
+
+    .element-button {
+        display: flex;
+        justify-content: space-between;
+        width: 36%;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    tr>td:nth-child(9) {
+        display: flex;
+        padding: 31px 8px;
+    }
+}

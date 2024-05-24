@@ -1,0 +1,25 @@
+<div id="product" class="border_content">
+    <div class="heading">
+        Sản phẩm
+    </div>
+
+    <div class="product_list">
+        {{#each data ~}}
+            <a class="list_child" href="/id={{idproduct}}">
+                <div class="product_img">
+                    <img src={{image}}>
+                </div>
+
+                <div class="underline"></div>
+
+                <div class="product_name">
+                    <h4>{{nameproduct}}</h4>
+                </div>
+
+                <div class="product_price price">
+                    <p>{{priceproduct}}đ</p>
+                </div>
+            </a>
+        {{~/each}} 
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<style>
+    .edit-icon:hover {
+        opacity: .7;
+        cursor: pointer;
+    }
+
+    .order-detail {
+        background-color: white;
+        padding: 20px 0px;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        margin-bottom: 12px;
+    }
+</style>
+
+<section class="vh-100" style="background-color: #f4f5f7; margin-top: 70px">
+   <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100 flex-column">
+         <div class="col col-lg-6 mb-4 mb-lg-0">
+            <div class="card mb-3" style="border-radius: .5rem;">
+               <div class="row g-0">
+                  {{!-- {{#each data ~}} --}}
+                    <div class="col-md-4 text-center text-black"
+                        style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                        <img src="/imgs/TV-Shop-logo.png"
+                            alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                        <h4>{{data.name}}</h4>
+                        <a href="#">
+                            <i class="far fa-edit mb-5 edit-icon"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body p-4">
+                            <h6>Thông tin tài khoản</h6>
+                            <hr class="mt-0 mb-4">
+                            <div class="row pt-1">
+                            <div class="col-10">
+                                <h6>Email</h6>
+                                <p class="text-muted">{{data.email}}</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h6>Số điện thoại</h6>
+                                <p class="text-muted">{{data.sdt}}</p>
+                            </div>
+                            {{#if (eq data.state "con")}}
+                                <div class="col-6 mb-3">
+                                    <h6>Give code</h6>
+                                    <p class="text-muted">{{data.code}}</p>
+                                </div>
+                            {{else}}
+                                <div class="col-6 mb-3"></div>
+                            {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                  {{!-- {{~/each}}  --}}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="container order-container ">
+        {{#if (eq orderInfor "")}}
+            <div class="text-center" style="padding-bottom: 50px">Bạn chưa có đơn hàng nào</div>
+        {{else}}
+            <div class="d-flex">
+                <h4 style="margin: 10px 0; text-transform: capitalize;">Chi tiết đơn hàng</h4>
+                <span class="badge badge-secondary badge-pill" 
+                style="height: fit-content; margin: auto 0; margin-left: 10px;">{{orderInfor.length}}</span>
+            </div>
+            {{#each orderInfor ~}}
+            <div class="row order-detail">
+                <div class="col-md-6">
+                    <p><strong>Tên khách hàng: </strong>{{username}}</p>
+                    <p><strong>Số điện thoại: </strong>{{phonenumber}}</p>
+                    <p><strong>Email: </strong>{{email}}</p>
+                    <p><strong>Địa chỉ: </strong>{{address}}</p>
+                    <p><strong>Giới tính: </strong>{{sex}}</p>
+                    <p><strong>Ghi chú: </strong>{{note}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Hình thức thanh toán: </strong>{{method}}</p>
+                    <div class="d-flex justify-content-between">
+                        <strong>Sản phẩm</strong>
+                        <strong>Số lượng</strong>
+                        <strong>Đơn giá</strong>
+                    </div>
+                    {{#each items ~}}
+                        <div class="product-detail row mb-4 d-flex justify-content-between align-items-center">
+                            <div class="col-md-3 col-lg-3 col-xl-3">
+                            <a href="/id={{idproduct}}" class="text-black mb-0" style="text-decoration: none; color: black">{{nameproduct}}</a>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <input id="form1" min="1" max="100" name="productnumber" value="{{productnumber}}" 
+                            type="number" readonly class="product-number form-control form-control-sm text-center" style="width: 50px"/>
+                            </div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="padding: 0">
+                            <h6 class="product-price price mb-0">{{price}}</h6>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                    {{~/each}} 
+                    <div class="d-flex flex-row">
+                        <p class="alert alert-success"><strong>Trạng thái: </strong>Đang xử lý</p>
+                        <h5><strong>Tổng tiền: </strong></h5>
+                        <h5 class="price total-price">{{totalprice}}</h5>
+                    </div>
+                </div>
+            </div>
+            {{~/each}} 
+        {{/if}}
+    </div>
+</section>

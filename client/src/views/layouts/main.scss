@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --white-color:#fff;
+    --black-color:#000;
+    --text-color:#333;
+    --primary-color: #ee4b2b;
+    --border-color:#dbdbdb;
+    --boder-xam:#e1e0e0;
+    --star-gold-color: #FFCE3E;
+    --header-hight: 70px;
+    --footer-mid:95px;
+    --header-hight-top:60px;
+    --header-hight-bottom: calc(var(--header-hight) - var( --header-hight-top));
+    --cover : 1200px
+}
+
+.border_content {
+    max-width: 80%;
+    margin: auto; 
+    padding: 50px 16px 56px 16px;
+    z-index: 1;
+}
+
+.heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 16px 0;
+    font-size: 30px;
+    font-weight: 100;
+}
+
+@import "../home.scss";
+@import "../productDetail.scss";
+@import "./admin.scss";
