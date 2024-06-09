@@ -21,7 +21,8 @@ const orderController = {
     },
 
     addOrder: async (req, res, next) => {
-        await axios.post(`${process.env.SERVER_DOMAIN}order/add`, req.body);
+        await axios.post(`${process.env.SERVER_DOMAIN}/order/add`, req.body);
+        console.log(req.body);
 
         // Thay đổi give code sau khi thực hiện thanh toán đầu.
         if (req.body.Iduser) {
