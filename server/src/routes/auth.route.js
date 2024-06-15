@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { statusCode, message } = require('../data/httpResponse');
 const appError = require('../errors/appError');
 const { cookieOption } = require('../config/token');
-// const userController = require('../../../client/src/controller/user.controller');
+const userController = require('../../../client/src/controller/user.controller');
 require('dotenv').config();
 
 module.exports = (app) => {
@@ -28,7 +28,7 @@ module.exports = (app) => {
                     process.env.CLIENT_PORT
                 );
 
-                // userController.logIn(req, res, next);
+                userController.logIn(req, res, next);
             } else {
                 next(new appError(statusCode.UNAUTHORIZED, message.ERROR));
             }
