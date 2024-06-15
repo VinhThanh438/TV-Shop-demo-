@@ -127,6 +127,7 @@
     data = JSON.parse(getDataFromLS)
     for (let i = 0; i < data.length; i++) {
       if (data[i].id == idproduct) {
+        {{!-- if (data[i].number < 0) break; --}}
         data[i].number = value
         break
       }
