@@ -1,7 +1,7 @@
 FROM node:alpine
 WORKDIR /usr/src/app/client
 COPY package*.json .
-RUN npm ci
+RUN npm i
 COPY . .
 # EXPOSE 3000
 CMD ["npm", "start"]
