@@ -7,7 +7,7 @@ module.exports = (app) => {
         next(
             new appError(
                 statusCode.NOT_FOUND,
-                `can not found http://localhost:${process.env.PORT}${req.originalUrl}`
+                `can not found ${process.env.SERVER_DOMAIN}${req.originalUrl}`
             )
         );
     });
