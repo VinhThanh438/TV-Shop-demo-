@@ -38,8 +38,6 @@ services:
     restart: always
     ports:
       - "4080:4080"
-    depends_on:
-      - server
 
 volumes:
   mysql_data: {}
