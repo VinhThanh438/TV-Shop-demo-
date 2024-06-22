@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 
 const productRoutes = require('./routes/products.route');
 const userRoutes = require('./routes/user.route');
-const authRoutes = require('./routes/auth.route');
+// const authRoutes = require('./routes/auth.route');
 const allRoutes = require('./routes/all.route');
 const orderRoutes = require('./routes/order.route');
 require('express-async-errors');
@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(flash());
 
-authRoutes(app);
+// authRoutes(app);
 userRoutes(app);
 productRoutes(app);
 orderRoutes(app);
