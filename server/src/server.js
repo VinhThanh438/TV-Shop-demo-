@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(flash());
 
-authRoutes(app);
+// authRoutes(app);
 userRoutes(app);
 productRoutes(app);
 orderRoutes(app);
